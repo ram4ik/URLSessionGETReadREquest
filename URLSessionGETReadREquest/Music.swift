@@ -22,6 +22,14 @@ class Music: Codable {
         case music_url, name, description
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        let serverGUID = guid?.replacingOccurrences(of: "id", with: "")
+        try container.encode(serverGUID, forKey: .guid)
+        try container.encode(name, forKey: .name)
+        // and the rest properties
+    }
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let val = try values.decode(String.self, forKey: .guid)
