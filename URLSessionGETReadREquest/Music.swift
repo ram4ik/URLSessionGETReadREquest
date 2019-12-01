@@ -10,7 +10,7 @@ import Foundation
 
 let myUrl = "https://www.orangevalleycaa.org/api/"
 
-class Music {
+class Music: Codable {
     
     var id: String?
     var music_url: String?
@@ -24,14 +24,17 @@ class Music {
             let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                 print(String.init(data: data!, encoding: .ascii) ?? "No data.")
                 
-                if let objData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) {
-                    if let dict = objData as? [String: Any] {
-                        let nm = Music()
-                        nm.id = dict["id"] as? String
-                        nm.name = dict["name"] as? String
-                        nm.description = dict["description"] as? String
-                        nm.music_url = dict["music_url"] as? String
-                    }
+//                if let objData = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) {
+//                    if let dict = objData as? [String: Any] {
+//                        let nm = Music()
+//                        nm.id = dict["id"] as? String
+//                        nm.name = dict["name"] as? String
+//                        nm.description = dict["description"] as? String
+//                        nm.music_url = dict["music_url"] as? String
+//                    }
+//                }
+                if let nm = try? JSONDecoder().decode(Music.self, from: data!) {
+                    print(nm.music_url ?? "no url")
                 }
             })
             task.resume()
