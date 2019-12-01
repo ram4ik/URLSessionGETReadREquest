@@ -62,10 +62,25 @@ class Music: Codable {
     }
     
     func updateServer() {
+        guard self.guid != nil else { return }
         let urlString = myUrl + "music/id/\(self.guid!)"
         
         var req = URLRequest.init(url: URL.init(string: urlString)!)
         req.httpMethod = "PUT"
+        req.httpBody = try? JSONEncoder().encode(self)
+        
+        let task = URLSession.shared.dataTask(with: req) { (data, response, error) in
+            print(String.init(data: data!, encoding: .ascii) ?? "no data")
+        }
+        task.resume()
+    }
+    
+    func deleteFromServer() {
+        guard self.guid != nil else { return }
+        let urlString = myUrl + "music/id/\(self.guid!)"
+        
+        var req = URLRequest.init(url: URL.init(string: urlString)!)
+        req.httpMethod = "DELETE"
         req.httpBody = try? JSONEncoder().encode(self)
         
         let task = URLSession.shared.dataTask(with: req) { (data, response, error) in
