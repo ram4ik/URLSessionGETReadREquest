@@ -22,6 +22,14 @@ class Music: Codable {
         case music_url, name, description
     }
     
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let val = try values.decode(String.self, forKey: .guid)
+        guid = "id:\(val)"
+        name = try values.decode(String.self, forKey: .name)
+        // rest of properties
+    }
+    
     static func fetch(_ id: Int, completionHandler: @escaping (Music) -> Void) {
         let urlString = myUrl + "music/id/\(id)"
         
