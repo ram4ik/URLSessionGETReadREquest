@@ -12,10 +12,15 @@ let myUrl = "https://www.orangevalleycaa.org/api/"
 
 class Music: Codable {
     
-    var id: String?
+    var guid: String?
     var music_url: String?
     var name: String?
     var description: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case guid = "id"
+        case music_url, name, description
+    }
     
     static func fetch(_ id: Int) {
         let urlString = myUrl + "music/id/\(id)"
@@ -35,6 +40,7 @@ class Music: Codable {
 //                }
                 if let nm = try? JSONDecoder().decode(Music.self, from: data!) {
                     print(nm.music_url ?? "no url")
+                    print(nm.guid ?? "no id")
                 }
             })
             task.resume()
