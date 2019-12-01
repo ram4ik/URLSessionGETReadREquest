@@ -12,7 +12,12 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button(action: {
-                Music.fetch(1)
+                Music.fetch(1) { (nm) in
+                    print(nm.music_url ?? "no url")
+                    if let md = try? JSONEncoder().encode(nm) {
+                        print(md)
+                    }
+                }
             }) {
                 Text("Fetch data")
             }

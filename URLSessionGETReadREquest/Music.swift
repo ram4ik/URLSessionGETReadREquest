@@ -22,7 +22,7 @@ class Music: Codable {
         case music_url, name, description
     }
     
-    static func fetch(_ id: Int) {
+    static func fetch(_ id: Int, completionHandler: @escaping (Music) -> Void) {
         let urlString = myUrl + "music/id/\(id)"
         
         if let url = URL.init(string: urlString) {
@@ -41,6 +41,7 @@ class Music: Codable {
                 if let nm = try? JSONDecoder().decode(Music.self, from: data!) {
                     print(nm.music_url ?? "no url")
                     print(nm.guid ?? "no id")
+                    completionHandler(nm)
                 }
             })
             task.resume()
