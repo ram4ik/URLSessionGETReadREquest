@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Button(action: {
-                Music.fetch()
+                Music.fetch(1)
             }) {
                 Text("Fetch data")
             }

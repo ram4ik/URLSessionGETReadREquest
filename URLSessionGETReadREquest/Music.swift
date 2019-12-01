@@ -8,10 +8,12 @@
 
 import Foundation
 
+let myUrl = "https://www.orangevalleycaa.org/api/"
+
 class Music {
     
-    static func fetch() {
-        let urlString = "https://www.google.com/"
+    static func fetch(_ id: Int) {
+        let urlString = myUrl + "music/id/\(id)"
         
         if let url = URL.init(string: urlString) {
             let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in

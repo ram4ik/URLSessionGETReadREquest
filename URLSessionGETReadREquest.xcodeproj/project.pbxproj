@@ -61,11 +61,11 @@
 				1DCC4BB62394408200868546 /* AppDelegate.swift */,
 				1DCC4BB82394408200868546 /* SceneDelegate.swift */,
 				1DCC4BBA2394408200868546 /* ContentView.swift */,
+				1DCC4BCA239440A600868546 /* Music.swift */,
 				1DCC4BBC2394408300868546 /* Assets.xcassets */,
 				1DCC4BC12394408300868546 /* LaunchScreen.storyboard */,
 				1DCC4BC42394408300868546 /* Info.plist */,
 				1DCC4BBE2394408300868546 /* Preview Content */,
-				1DCC4BCA239440A600868546 /* Music.swift */,
 			);
 			path = URLSessionGETReadREquest;
 			sourceTree = "<group>";
