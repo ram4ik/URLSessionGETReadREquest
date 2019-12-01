@@ -64,6 +64,20 @@ class Music: Codable {
         }
     }
     
+    static func fetchAll(completionHandler: @escaping ([Music]) -> Void) {
+        let urlString = myUrl + "music/"
+        
+        if let url = URL.init(string: urlString) {
+            let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                print(String.init(data: data!, encoding: .ascii) ?? "No data.")
+                if let nm = try? JSONDecoder().decode([Music].self, from: data!) {
+                    completionHandler(nm)
+                }
+            })
+            task.resume()
+        }
+    }
+    
     func saveToServer() {
         let urlString = myUrl + "music/"
         
